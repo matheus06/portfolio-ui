@@ -1,0 +1,16 @@
+<div>
+  <section class="cert">
+    <h2>Certifications</h2>
+    <mat-spinner class="spinner" *ngIf="isLoading"></mat-spinner>
+    <ul class="tiles" *ngIf="!isLoading">
+      <li *ngFor='let certification of certifications;'>
+        <a href="{{certification.badgeUrl}}" target="_blank" rel="noopener noreferrer">
+          <div class="tile">
+            <div class="image" style="background-image: url({{certification.imageUrl}})"></div>
+          </div>
+        </a>
+      </li>
+    </ul>
+  </section>
+  <section class="cert" *ngIf="dataLoadingError"> Sorry! API not available, please try again later!</section>
+</div>

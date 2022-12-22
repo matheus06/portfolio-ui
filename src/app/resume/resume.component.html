@@ -1,0 +1,11 @@
+<div id="resume">
+  <section>
+    <h1>Matheus Sexto</h1>
+    <h2>.NET Full-Stack Developer</h2>
+    <mat-spinner class="spinner" *ngIf="isLoading"></mat-spinner>
+    <h3 *ngFor='let item of resume;'>
+      <a *ngIf="!isLoading" href="{{item.blobUrl}}" target="_blank" rel="noopener noreferrer">{{item.description}}</a>
+    </h3>
+  </section>
+  <section *ngIf="dataLoadingError"> Sorry! API not available, please try again later!</section>
+</div>

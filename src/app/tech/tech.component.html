@@ -1,0 +1,14 @@
+<div>
+  <section class="tech">
+    <h2>Technologies</h2>
+    <mat-spinner class="spinner" *ngIf="isLoading"></mat-spinner>
+    <ul class="tiles" *ngIf="!isLoading">
+      <li *ngFor='let technologie of technologies;'>
+        <div class="tile">
+          <div class="image" style="background-image: url({{technologie.imageUrl}})"></div>
+          <h3>{{technologie.name}}</h3>
+        </div>
+    </ul>
+  </section>
+  <section class="tech" *ngIf="dataLoadingError"> Sorry! API not available, please try again later!</section>
+</div>
