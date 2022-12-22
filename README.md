@@ -1,6 +1,6 @@
 # Portfolio UI
 
-* https://matheus-portfolio-ui.azurewebsites.net/
+* https://matheus.azurewebsites.net/
 
 > This is my portfolio-ui made in Angular.
 
