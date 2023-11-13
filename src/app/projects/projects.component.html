@@ -1,0 +1,13 @@
+<div *ngIf="!dataLoadingError && !isLoading">
+  <section class="tech">
+    <h2>Projects</h2>
+      <carousel >
+        <slide *ngFor="let project of projects">
+          <img src="{{project.imageUrl}}" alt="first slide" style="display: block; width: 100%;">
+          <div class="carousel-caption d-none d-md-block">
+            <p>{{project.name}}</p>
+          </div>
+        </slide>
+      </carousel>
+  </section>
+</div>

@@ -1,0 +1,50 @@
+div
+{
+    background-color: #d6daec;
+    text-align: center;
+}
+
+.image
+{
+    background-position: center;
+    background-repeat: no-repeat;
+    height: 125px;
+    margin: 0 auto 25px auto;
+    width: 125px;
+    background-size: contain;
+}
+
+.tiles
+{
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+.tile
+{
+    height: 220px;
+    padding: 0 0 50px 0;
+}
+
+li
+{
+    float: left;
+    margin: 0;
+    padding: 0 10px;
+    width: 25%;
+}
+
+.cert
+{
+    color: #000;
+    text-align: center
+}
+
+@media screen and (max-width: 800px)
+{
+    li{
+        height: 244px;
+        width: 50%;
+    }
+}
