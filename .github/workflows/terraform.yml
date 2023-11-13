@@ -4,6 +4,9 @@ on:
   push:
     branches:
     - main
+    paths:
+      - src/scripts/terraform/**
+      - .github/workflows/terraform.yml
  
 jobs:
   terraform:
