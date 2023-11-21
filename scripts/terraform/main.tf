@@ -133,20 +133,20 @@ resource "azurerm_api_management" "portfolioapimgmt" {
 }
 
 # Create Api Management Open Api
-resource "azurerm_api_management_api" "webapimgmt" {
-  name                = "Microservice.Portfolio-v2"
-  resource_group_name = azurerm_resource_group.rg.name
-  api_management_name = azurerm_api_management.portfolioapimgmt.name
-  revision            = "1"
-  display_name        = "Microservice.Portfolio-v2"
-  service_url         = "https://portfolio-api-v2.azure-api.net" 
-  protocols           = ["https"]
+# resource "azurerm_api_management_api" "webapimgmt" {
+#   name                = "Microservice.Portfolio-v2"
+#   resource_group_name = azurerm_resource_group.rg.name
+#   api_management_name = azurerm_api_management.portfolioapimgmt.name
+#   revision            = "1"
+#   display_name        = "Microservice.Portfolio-v2"
+#   service_url         = "https://portfolio-api-v2.azure-api.net" 
+#   protocols           = ["https"]
 
-  import {
-    content_format = "swagger-link-json"
-    content_value  = "https://matheus-portfolio-api-v2.azurewebsites.net/swagger/v1/swagger.json"
-  }
-}
+#   import {
+#     content_format = "swagger-link-json"
+#     content_value  = "https://matheus-portfolio-api-v2.azurewebsites.net/swagger/v1/swagger.json"
+#   }
+# }
 
 # Create Api Management Function Api
 # resource "azurerm_api_management_api" "functionapi" {
