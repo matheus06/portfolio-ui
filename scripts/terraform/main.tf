@@ -34,7 +34,7 @@ resource "azurerm_service_plan" "appserviceplan" {
   sku_name            = "F1"
 }
 
-# Create the Function Linux App Service Plan (Only available at East US)
+# Create the Function Linux App Service Plan
 resource "azurerm_service_plan" "functionappserviceplan" {
   name                = var.function_service_plan_name
   location            = "France Central"
@@ -109,17 +109,17 @@ resource "azurerm_storage_container" "container" {
 
 
 # Create the Function Api
-# resource "azurerm_linux_function_app" "functionapi" {
-#   name                = "matheus-portfolio-function-api"
-#   resource_group_name = azurerm_resource_group.rg.name
-#   location            = azurerm_resource_group.rg.location
+resource "azurerm_linux_function_app" "functionapi" {
+  name                = "matheus-portfolio-function-api"
+  resource_group_name = azurerm_resource_group.rg.name
+  location            = azurerm_resource_group.rg.location
 
-#   storage_account_name       = azurerm_storage_account.storageacc.name
-#   storage_account_access_key = azurerm_storage_account.storageacc.primary_access_key
-#   service_plan_id            = azurerm_service_plan.functionappserviceplan.id
+  storage_account_name       = azurerm_storage_account.storageacc.name
+  storage_account_access_key = azurerm_storage_account.storageacc.primary_access_key
+  service_plan_id            = azurerm_service_plan.functionappserviceplan.id
 
-#   site_config {}
-# }
+  site_config {}
+}
 
 # Create Api Management
 resource "azurerm_api_management" "portfolioapimgmt" {
