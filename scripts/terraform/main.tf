@@ -162,6 +162,7 @@ resource "azurerm_api_management_api" "testapimgmt" {
   api_management_name = azurerm_api_management.portfolioapimgmt.name
   revision            = "1"
   display_name        = "New Desc"
+  path                = "function"
   protocols           = ["https"]
   
 }
