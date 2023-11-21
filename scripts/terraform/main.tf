@@ -38,7 +38,7 @@ resource "azurerm_service_plan" "appserviceplan" {
 resource "azurerm_service_plan" "functionappserviceplan" {
   name                = var.function_service_plan_name
   location            = "France Central"
-  resource_group_name = azurerm_resource_group.sharedrg.name
+  resource_group_name = azurerm_resource_group.rg.name
   os_type             = "Linux"
   sku_name            = "Y1"
 }
