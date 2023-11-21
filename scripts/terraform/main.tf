@@ -148,13 +148,12 @@ resource "azurerm_api_management_api" "webapimgmt" {
 }
 
 # Create Api Management Function Api
-resource "azurerm_api_management_api" "functionapi" {
-  name                = "test"
+resource "azurerm_api_management_backend" "functionbackend" {
+  name                = "portfolio-func-backend"
   resource_group_name = azurerm_resource_group.rg.name
   api_management_name = azurerm_api_management.portfolioapimgmt.name
-  revision            = "1"
-  display_name        = "test"
-  protocols           = ["https"]
+  protocol            = "http"
+  url                 = "https://${azurerm_linux_function_app.functionapi.name}.azurewebsites.net/api/"
 }
 
 resource "azurerm_api_management_policy" "portfolioapipolicy" {
