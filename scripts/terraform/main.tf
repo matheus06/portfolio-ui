@@ -34,9 +34,10 @@ resource "azurerm_service_plan" "appserviceplan" {
   sku_name            = "F1"
 }
 
-# Create the web app, pass in the App Service Plan ID
+
+# Create the web app
 resource "azurerm_linux_web_app" "webapp" {
-  name                  = var.app_name
+  name                  = var.ui_app_name
   location              = var.location
   resource_group_name   = azurerm_resource_group.rg.name
   service_plan_id       = azurerm_service_plan.appserviceplan.id
@@ -49,8 +50,131 @@ resource "azurerm_linux_web_app" "webapp" {
     application_stack {
         docker_registry_username = var.registry_username
         docker_registry_password = var.registry_password
-        docker_image_name   = var.image_name
+        docker_image_name   = var.ui_image_name
         docker_registry_url = var.registry_url
     } 
   }
+}
+
+
+# Create the web app
+resource "azurerm_linux_web_app" "webappapi" {
+  name                  = var.api_app_name
+  location              = var.location
+  resource_group_name   = azurerm_resource_group.rg.name
+  service_plan_id       = azurerm_service_plan.appserviceplan.id
+  https_only            = true
+  
+  site_config { 
+    minimum_tls_version = "1.2"
+    always_on = false
+  
+    application_stack {
+        docker_registry_username = var.registry_username
+        docker_registry_password = var.registry_password
+        docker_image_name   = var.api_image_name
+        docker_registry_url = var.registry_url
+    } 
+  }
+}
+
+# Create the storage acc
+resource "azurerm_storage_account" "storageacc" {
+  name                     = "portfoliostorageacc"
+  resource_group_name      = azurerm_resource_group.rg.name
+  location                 = azurerm_resource_group.rg.location
+  account_tier             = "Standard"
+  account_replication_type = "LRS"
+
+  tags = {
+    environment = "portfolio"
+  }
+}
+
+# Create the storage container
+resource "azurerm_storage_container" "container" {
+  name                  = "portfolio"
+  storage_account_name  = azurerm_storage_account.storageacc.name
+  container_access_type = "private"
+}
+
+
+# Create the az function
+resource "azurerm_linux_function_app" "functionapi" {
+  name                = "matheus-portfolio-function-api"
+  resource_group_name = azurerm_resource_group.rg.name
+  location            = azurerm_resource_group.rg.location
+
+  storage_account_name       = azurerm_storage_account.storageacc.name
+  storage_account_access_key = azurerm_storage_account.storageacc.primary_access_key
+  service_plan_id            = azurerm_service_plan.appserviceplan.id
+
+  site_config {}
+}
+
+# Create Api Management
+resource "azurerm_api_management" "portfolioapimgmt" {
+  name                = "matheus-portfolio-api-v2"
+  location            = azurerm_resource_group.rg.location
+  resource_group_name = azurerm_resource_group.rg.name
+  publisher_name      = "matheus-portfolio-api-v2"
+  publisher_email     = "matheus.sexto@gmail.com"
+
+  sku_name = "Consumption_0"
+}
+
+# Create Api Management Open Api
+resource "azurerm_api_management_api" "openapi" {
+  name                = "Microservice.Portfolio"
+  resource_group_name = azurerm_resource_group.rg.name
+  api_management_name = azurerm_api_management.portfolioapimgmt.name
+  revision            = "1"
+  display_name        = "Microservice.Portfolio"
+  service_url         = "https://portfolio-api.azure-api.net" 
+  protocols           = ["https"]
+
+  import {
+    content_format = "swagger-link-json"
+    content_value  = "https://matheus-portfolio-api.azurewebsites.net/swagger/v1/swagger.json"
+  }
+}
+
+# Create Api Management Function Api
+resource "azurerm_api_management_api" "functionapi" {
+  name                = "Portifolio.FunctionApp"
+  resource_group_name = azurerm_resource_group.rg.name
+  api_management_name = azurerm_api_management.portfolioapimgmt.name
+  revision            = "1"
+  display_name        = "Portifolio.FunctionApp"
+  service_url         = "https://portfolio-api.azure-api.net/function" 
+  protocols           = ["https"]
+}
+
+resource "azurerm_api_management_policy" "portfolioapipolicy" {
+  api_management_id = azurerm_api_management.portfolioapimgmt.id
+  xml_content = <<XML
+<policies>
+    <inbound>
+        <cors allow-credentials="false">
+            <allowed-origins>
+                <origin>https://matheus.azurewebsites.net/</origin>
+            </allowed-origins>
+            <allowed-methods>
+                <method>GET</method>
+                <method>POST</method>
+            </allowed-methods>
+        </cors>
+        <choose>
+            <when condition="@(context.Request.Url.Query.GetValueOrDefault("api") == "function")">
+                <set-backend-service base-url="https://portfolio-api.azure-api.net/function/" />
+            </when>
+        </choose>
+    </inbound>
+    <backend>
+        <forward-request />
+    </backend>
+    <outbound />
+    <on-error />
+</policies>
+XML
 }

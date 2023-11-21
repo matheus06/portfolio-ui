@@ -11,9 +11,14 @@ variable "shared_resource_group_name" {
   type = string
 }
 
-variable "app_name" {
+variable "ui_app_name" {
   type = string
 }
+
+variable "api_app_name" {
+  type = string
+}
+
 
 variable "registry_url" {
   type = string
@@ -27,7 +32,11 @@ variable "registry_password" {
   type = string
 }
 
-variable "image_name" {
+variable "ui_image_name" {
+  type = string
+}
+
+variable "api_image_name" {
   type = string
 }
 
