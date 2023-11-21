@@ -139,13 +139,8 @@ resource "azurerm_api_management_api" "webapimgmt" {
   api_management_name = azurerm_api_management.portfolioapimgmt.name
   revision            = "1"
   display_name        = "test sisplayt"
-  service_url         = "https://portfolio-api-v2.azure-api.net" 
   protocols           = ["https"]
 
-  import {
-    content_format = "swagger-link-json"
-    content_value  = "https://matheus-portfolio-api-v2.azurewebsites.net/swagger/v1/swagger.json"
-  }
 }
 
 # Create Api Management Function Api
