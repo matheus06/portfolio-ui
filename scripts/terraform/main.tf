@@ -149,11 +149,11 @@ resource "azurerm_api_management_api" "webapimgmt" {
 
 # Create Api Management Function Api
 resource "azurerm_api_management_api" "functionapi" {
-  name                = "portifolio-functionapp"
+  name                = "test"
   resource_group_name = azurerm_resource_group.rg.name
   api_management_name = azurerm_api_management.portfolioapimgmt.name
   revision            = "1"
-  display_name        = "Portifolio FunctionApp"
+  display_name        = "test"
   protocols           = ["https"]
 }
 
