@@ -47,3 +47,7 @@ variable "api_image_name" {
 variable "location" {
   type = string
 }
+
+variable "location_function" {
+  type = string
+}

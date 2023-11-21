@@ -37,7 +37,7 @@ resource "azurerm_service_plan" "appserviceplan" {
 # Create the Function Linux App Service Plan
 resource "azurerm_service_plan" "functionappserviceplan" {
   name                = var.function_service_plan_name
-  location            = "France Central"
+  location            = var.location_function
   resource_group_name = azurerm_resource_group.sharedrg.name
   os_type             = "Linux"
   sku_name            = "Y1"
@@ -112,7 +112,7 @@ resource "azurerm_storage_container" "container" {
 resource "azurerm_linux_function_app" "functionapi" {
   name                = "matheus-portfolio-function-api"
   resource_group_name = azurerm_resource_group.rg.name
-  location            = "France Central"
+  location            = var.location_function
 
   storage_account_name       = azurerm_storage_account.storageacc.name
   storage_account_access_key = azurerm_storage_account.storageacc.primary_access_key
@@ -148,15 +148,14 @@ resource "azurerm_api_management_api" "webapimgmt" {
 }
 
 # Create Api Management Function Api
-# resource "azurerm_api_management_api" "functionapi" {
-#   name                = "Portifolio.FunctionApp"
-#   resource_group_name = azurerm_resource_group.rg.name
-#   api_management_name = azurerm_api_management.portfolioapimgmt.name
-#   revision            = "1"
-#   display_name        = "Portifolio.FunctionApp"
-#   service_url         = "https://portfolio-api.azure-api.net/function" 
-#   protocols           = ["https"]
-# }
+resource "azurerm_api_management_api" "functionapi" {
+  name                = "portifolio-functionapp"
+  resource_group_name = azurerm_resource_group.rg.name
+  api_management_name = azurerm_api_management.portfolioapimgmt.name
+  revision            = "1"
+  display_name        = "Portifolio FunctionApp"
+  protocols           = ["https"]
+}
 
 resource "azurerm_api_management_policy" "portfolioapipolicy" {
   api_management_id = azurerm_api_management.portfolioapimgmt.id
