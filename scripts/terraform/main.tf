@@ -148,14 +148,14 @@ resource "azurerm_api_management_api" "webapimgmt" {
 }
 
 # Create Api Management Function Api
-resource "azurerm_api_management_api" "functionapi" {
-  name                = "portifolio-functionapp"
-  resource_group_name = azurerm_resource_group.rg.name
-  api_management_name = azurerm_api_management.portfolioapimgmt.name
-  revision            = "1"
-  display_name        = "Portifolio FunctionApp"
-  protocols           = ["https"]
-}
+# resource "azurerm_api_management_api" "functionapi" {
+#   name                = "portifolio-functionapp"
+#   resource_group_name = azurerm_resource_group.rg.name
+#   api_management_name = azurerm_api_management.portfolioapimgmt.name
+#   revision            = "1"
+#   display_name        = "Portifolio FunctionApp"
+#   protocols           = ["https"]
+# }
 
 resource "azurerm_api_management_policy" "portfolioapipolicy" {
   api_management_id = azurerm_api_management.portfolioapimgmt.id
