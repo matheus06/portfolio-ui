@@ -177,31 +177,31 @@ resource "azurerm_api_management_api_operation" "getcertoperation" {
   url_template        = "/certifications"
 }
 
-# resource "azurerm_api_management_api_operation_policy" "example" {
-#   api_name            = azurerm_api_management_api_operation.getcertoperation.api_name
-#   api_management_name = azurerm_api_management_api_operation.getcertoperation.api_management_name
-#   resource_group_name = azurerm_api_management_api_operation.getcertoperation.resource_group_name
-#   operation_id        = azurerm_api_management_api_operation.getcertoperation.operation_id
+resource "azurerm_api_management_api_operation_policy" "example" {
+  api_name            = azurerm_api_management_api_operation.getcertoperation.api_name
+  api_management_name = azurerm_api_management_api_operation.getcertoperation.api_management_name
+  resource_group_name = azurerm_api_management_api_operation.getcertoperation.resource_group_name
+  operation_id        = azurerm_api_management_api_operation.getcertoperation.operation_id
 
-#   xml_content = <<XML
-# <policies>
-#     <inbound>
-#         <base />
-#         <set-backend-service id="apim-generated-policy" backend-id="portfolio-func-backend" />
-#     </inbound>
-#     <backend>
-#         <base />
-#     </backend>
-#     <outbound>
-#         <base />
-#     </outbound>
-#     <on-error>
-#         <base />
-#     </on-error>
-# </policies>
-# XML
+  xml_content = <<XML
+<policies>
+    <inbound>
+        <base />
+        <set-backend-service id="apim-generated-policy" backend-id="portfolio-func-backend" />
+    </inbound>
+    <backend>
+        <base />
+    </backend>
+    <outbound>
+        <base />
+    </outbound>
+    <on-error>
+        <base />
+    </on-error>
+</policies>
+XML
 
-# }
+}
 
 resource "azurerm_api_management_policy" "portfolioapipolicy" {
   api_management_id = azurerm_api_management.portfolioapimgmt.id
