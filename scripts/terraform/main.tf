@@ -34,10 +34,10 @@ resource "azurerm_service_plan" "appserviceplan" {
   sku_name            = "F1"
 }
 
-# Create the Function Linux App Service Plan
+# Create the Function Linux App Service Plan (Only available at East US)
 resource "azurerm_service_plan" "functionappserviceplan" {
   name                = var.function_service_plan_name
-  location            = "East US"
+  location            = "France Central"
   resource_group_name = azurerm_resource_group.sharedrg.name
   os_type             = "Linux"
   sku_name            = "Y1"
