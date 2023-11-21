@@ -157,49 +157,49 @@ resource "azurerm_api_management_backend" "functionbackend" {
 }
 
 resource "azurerm_api_management_api" "functionmgmtapi" {
-  name                = "portifolio-function"
+  name                = "any-mat"
   resource_group_name = azurerm_resource_group.rg.name
   api_management_name = azurerm_api_management.portfolioapimgmt.name
   revision            = "1"
-  display_name        = "Portifolio.FunctionApp"
+  display_name        = "bla bla"
   protocols           = ["https"]
 }
 
-resource "azurerm_api_management_api_operation" "getcertoperation" {
-  operation_id        = "get-certifications"
-  api_name            = azurerm_api_management_api.functionmgmtapi.name
-  api_management_name = azurerm_api_management.portfolioapimgmt.name
-  resource_group_name = azurerm_resource_group.rg.name
-  display_name        = "certifications"
-  method              = "GET"
-  url_template        = "/certifications"
-}
+# resource "azurerm_api_management_api_operation" "getcertoperation" {
+#   operation_id        = "get-certifications"
+#   api_name            = azurerm_api_management_api.functionmgmtapi.name
+#   api_management_name = azurerm_api_management.portfolioapimgmt.name
+#   resource_group_name = azurerm_resource_group.rg.name
+#   display_name        = "certifications"
+#   method              = "GET"
+#   url_template        = "/certifications"
+# }
 
-resource "azurerm_api_management_api_operation_policy" "example" {
-  api_name            = azurerm_api_management_api_operation.getcertoperation.api_name
-  api_management_name = azurerm_api_management_api_operation.getcertoperation.api_management_name
-  resource_group_name = azurerm_api_management_api_operation.getcertoperation.resource_group_name
-  operation_id        = azurerm_api_management_api_operation.getcertoperation.operation_id
+# resource "azurerm_api_management_api_operation_policy" "example" {
+#   api_name            = azurerm_api_management_api_operation.getcertoperation.api_name
+#   api_management_name = azurerm_api_management_api_operation.getcertoperation.api_management_name
+#   resource_group_name = azurerm_api_management_api_operation.getcertoperation.resource_group_name
+#   operation_id        = azurerm_api_management_api_operation.getcertoperation.operation_id
 
-  xml_content = <<XML
-<policies>
-    <inbound>
-        <base />
-        <set-backend-service id="apim-generated-policy" backend-id="portfolio-func-backend" />
-    </inbound>
-    <backend>
-        <base />
-    </backend>
-    <outbound>
-        <base />
-    </outbound>
-    <on-error>
-        <base />
-    </on-error>
-</policies>
-XML
+#   xml_content = <<XML
+# <policies>
+#     <inbound>
+#         <base />
+#         <set-backend-service id="apim-generated-policy" backend-id="portfolio-func-backend" />
+#     </inbound>
+#     <backend>
+#         <base />
+#     </backend>
+#     <outbound>
+#         <base />
+#     </outbound>
+#     <on-error>
+#         <base />
+#     </on-error>
+# </policies>
+# XML
 
-}
+# }
 
 resource "azurerm_api_management_policy" "portfolioapipolicy" {
   api_management_id = azurerm_api_management.portfolioapimgmt.id
