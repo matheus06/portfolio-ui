@@ -156,13 +156,14 @@ resource "azurerm_api_management_backend" "functionbackend" {
   url                 = "https://${azurerm_linux_function_app.functionapi.name}.azurewebsites.net/api/"
 }
 
-resource "azurerm_api_management_api" "functionmgmtapi" {
-  name                = "any-mat"
+resource "azurerm_api_management_api" "testapimgmt" {
+  name                = "funcmath-portfolio"
   resource_group_name = azurerm_resource_group.rg.name
   api_management_name = azurerm_api_management.portfolioapimgmt.name
   revision            = "1"
-  display_name        = "bla bla"
+  display_name        = "New Desc"
   protocols           = ["https"]
+  
 }
 
 # resource "azurerm_api_management_api_operation" "getcertoperation" {
