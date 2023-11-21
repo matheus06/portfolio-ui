@@ -38,7 +38,7 @@ resource "azurerm_service_plan" "appserviceplan" {
 resource "azurerm_service_plan" "functionappserviceplan" {
   name                = var.function_service_plan_name
   location            = "France Central"
-  resource_group_name = azurerm_resource_group.rg.name
+  resource_group_name = azurerm_resource_group.sharedrg.name
   os_type             = "Linux"
   sku_name            = "Y1"
 }
@@ -112,7 +112,7 @@ resource "azurerm_storage_container" "container" {
 resource "azurerm_linux_function_app" "functionapi" {
   name                = "matheus-portfolio-function-api"
   resource_group_name = azurerm_resource_group.rg.name
-  location            = azurerm_resource_group.rg.location
+  location            = "France Central"
 
   storage_account_name       = azurerm_storage_account.storageacc.name
   storage_account_access_key = azurerm_storage_account.storageacc.primary_access_key
