@@ -167,15 +167,15 @@ resource "azurerm_api_management_api" "testapimgmt" {
   
 }
 
-# resource "azurerm_api_management_api_operation" "getcertoperation" {
-#   operation_id        = "get-certifications"
-#   api_name            = azurerm_api_management_api.functionmgmtapi.name
-#   api_management_name = azurerm_api_management.portfolioapimgmt.name
-#   resource_group_name = azurerm_resource_group.rg.name
-#   display_name        = "certifications"
-#   method              = "GET"
-#   url_template        = "/certifications"
-# }
+resource "azurerm_api_management_api_operation" "getcertoperation" {
+  operation_id        = "get-certifications"
+  api_name            = azurerm_api_management_api.testapimgmt.name
+  api_management_name = azurerm_api_management.portfolioapimgmt.name
+  resource_group_name = azurerm_resource_group.rg.name
+  display_name        = "certifications"
+  method              = "GET"
+  url_template        = "/certifications"
+}
 
 # resource "azurerm_api_management_api_operation_policy" "example" {
 #   api_name            = azurerm_api_management_api_operation.getcertoperation.api_name
