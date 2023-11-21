@@ -34,17 +34,17 @@ resource "azurerm_service_plan" "appserviceplan" {
   sku_name            = "F1"
 }
 
-# Create the Linux App Service Plan
-resource "azurerm_service_plan" "functionappserviceplan" {
-  name                = var.function_service_plan_name
-  location            = var.location
-  resource_group_name = azurerm_resource_group.sharedrg.name
-  os_type             = "Linux"
-  sku_name            = "Y1"
-}
+# Create the Function Linux App Service Plan
+# resource "azurerm_service_plan" "functionappserviceplan" {
+#   name                = var.function_service_plan_name
+#   location            = var.location
+#   resource_group_name = azurerm_resource_group.sharedrg.name
+#   os_type             = "Linux"
+#   sku_name            = "Y1"
+# }
 
 
-# Create the web app
+# Create the web app UI
 resource "azurerm_linux_web_app" "webapp" {
   name                  = var.ui_app_name
   location              = var.location
@@ -66,7 +66,7 @@ resource "azurerm_linux_web_app" "webapp" {
 }
 
 
-# Create the web app
+# Create the web app Api
 resource "azurerm_linux_web_app" "webappapi" {
   name                  = var.api_app_name
   location              = var.location
@@ -108,18 +108,18 @@ resource "azurerm_storage_container" "container" {
 }
 
 
-# Create the az function
-resource "azurerm_linux_function_app" "functionapi" {
-  name                = "matheus-portfolio-function-api"
-  resource_group_name = azurerm_resource_group.rg.name
-  location            = azurerm_resource_group.rg.location
+# Create the Function Api
+# resource "azurerm_linux_function_app" "functionapi" {
+#   name                = "matheus-portfolio-function-api"
+#   resource_group_name = azurerm_resource_group.rg.name
+#   location            = azurerm_resource_group.rg.location
 
-  storage_account_name       = azurerm_storage_account.storageacc.name
-  storage_account_access_key = azurerm_storage_account.storageacc.primary_access_key
-  service_plan_id            = azurerm_service_plan.functionappserviceplan.id
+#   storage_account_name       = azurerm_storage_account.storageacc.name
+#   storage_account_access_key = azurerm_storage_account.storageacc.primary_access_key
+#   service_plan_id            = azurerm_service_plan.functionappserviceplan.id
 
-  site_config {}
-}
+#   site_config {}
+# }
 
 # Create Api Management
 resource "azurerm_api_management" "portfolioapimgmt" {
@@ -149,15 +149,15 @@ resource "azurerm_api_management_api" "openapi" {
 }
 
 # Create Api Management Function Api
-resource "azurerm_api_management_api" "functionapi" {
-  name                = "Portifolio.FunctionApp"
-  resource_group_name = azurerm_resource_group.rg.name
-  api_management_name = azurerm_api_management.portfolioapimgmt.name
-  revision            = "1"
-  display_name        = "Portifolio.FunctionApp"
-  service_url         = "https://portfolio-api.azure-api.net/function" 
-  protocols           = ["https"]
-}
+# resource "azurerm_api_management_api" "functionapi" {
+#   name                = "Portifolio.FunctionApp"
+#   resource_group_name = azurerm_resource_group.rg.name
+#   api_management_name = azurerm_api_management.portfolioapimgmt.name
+#   revision            = "1"
+#   display_name        = "Portifolio.FunctionApp"
+#   service_url         = "https://portfolio-api.azure-api.net/function" 
+#   protocols           = ["https"]
+# }
 
 resource "azurerm_api_management_policy" "portfolioapipolicy" {
   api_management_id = azurerm_api_management.portfolioapimgmt.id
