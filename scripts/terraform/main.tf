@@ -27,7 +27,7 @@ resource "azurerm_resource_group" "sharedrg" {
 
 # Create the Linux App Service Plan
 resource "azurerm_service_plan" "appserviceplan" {
-  name                = var.location
+  name                = var.service_plan_name
   location            = var.location
   resource_group_name = azurerm_resource_group.sharedrg.name
   os_type             = "Linux"
