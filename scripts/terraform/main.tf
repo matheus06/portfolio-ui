@@ -134,11 +134,11 @@ resource "azurerm_api_management" "portfolioapimgmt" {
 
 # Create Api Management Open Api
 resource "azurerm_api_management_api" "webapimgmt" {
-  name                = "testapmatheus"
+  name                = "microservice.portfolio"
   resource_group_name = azurerm_resource_group.rg.name
   api_management_name = azurerm_api_management.portfolioapimgmt.name
   revision            = "1"
-  display_name        = "test sisplayt"
+  display_name        = "Microservice.Portfolio"
   protocols           = ["https"]
 
 }
