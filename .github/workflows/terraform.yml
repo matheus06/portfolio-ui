@@ -5,7 +5,7 @@ on:
     branches:
     - main
     paths:
-      - src/scripts/terraform/**
+      - scripts/terraform/**
       - .github/workflows/terraform.yml
  
 jobs:
