@@ -3,6 +3,10 @@ variable "service_plan_name" {
   type = string
 }
 
+variable "function_service_plan_name" {
+  type = string
+}
+
 variable "resource_group_name" {
   type = string
 }
