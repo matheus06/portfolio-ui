@@ -142,7 +142,7 @@ resource "azurerm_api_management_api" "webapimgmt" {
   protocols           = ["https"]
 
     import {
-    content_format = "swagger-link-json"
+    content_format = "swagger-json"
     content_value  = "https://matheus-portfolio-api.azurewebsites.net/swagger/v1/swagger.json"
   }
 
