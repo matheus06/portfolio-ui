@@ -141,11 +141,6 @@ resource "azurerm_api_management_api" "webapimgmt" {
   display_name        = "Microservice Portfolio API"
   protocols           = ["https"]
 
-    import {
-    content_format = "swagger-json"
-    content_value  = "https://matheus-portfolio-api.azurewebsites.net/swagger/v1/swagger.json"
-  }
-
 }
 
 # Create Api Management Function Api
