@@ -114,10 +114,10 @@ resource "azurerm_linux_function_app" "functionapi" {
 
 # Create Api Management
 resource "azurerm_api_management" "portfolioapimgmt" {
-  name                = "matheus-portfolio-api-v2"
+  name                = "matheus-portfolio-api-mgmt"
   location            = azurerm_resource_group.rg.location
   resource_group_name = azurerm_resource_group.rg.name
-  publisher_name      = "matheus-portfolio-api-v2"
+  publisher_name      = "matheus-portfolio-api-mgmt"
   publisher_email     = "matheus.sexto@gmail.com"
 
   sku_name = "Consumption_0"
