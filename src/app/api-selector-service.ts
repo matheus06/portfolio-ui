@@ -3,7 +3,7 @@ import { BehaviorSubject } from 'rxjs';
 
 @Injectable()
 export class ApiSelectorService {
-  private apiSelector = new BehaviorSubject('?api=function');
+  private apiSelector = new BehaviorSubject('');
   selectedApi = this.apiSelector.asObservable();
   
   constructor() {}
