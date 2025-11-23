@@ -14,7 +14,7 @@ export class FooterComponent implements OnInit {
   baseUrl = environment.baseUrl;
   selectedApi: string = '';
   dataLoadingError = false;
-  checked = false;
+  checked = true;
   
   constructor(private http: HttpClient, private apiSelector: ApiSelectorService) {
     this.currentYear = new Date().getFullYear();
