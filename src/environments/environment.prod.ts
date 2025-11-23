@@ -1,4 +1,4 @@
 export const environment = {
   production: true,
-  baseUrl: 'https://portfolio-api.azure-api.net'
+  baseUrl: 'https://portfolio-apim.azure-api.net'
 };
