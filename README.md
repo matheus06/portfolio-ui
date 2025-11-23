@@ -10,8 +10,6 @@
 
 ![Build And Deploy Api to Azure](https://github.com/matheus06/portfolio-ui/actions/workflows/azure-container-webapp-ui.yml/badge.svg)
 
-![Terraform Infra Azure](https://github.com/matheus06/portfolio-ui/actions/workflows/terraform.yml/badge.svg)
-
 ## Architeture
 
 ![architeture](/architeture/portfolio.png)
